@@ -1,25 +1,38 @@
+// === Default to Dark Mode on First Visit ===
+if (!localStorage.getItem('theme')) {
+  localStorage.setItem('theme', 'dark');
+}
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('darkModeToggle');
   const themeIcon = document.getElementById('themeIcon');
   const ytFrame = document.getElementById('ytFrame');
-  const lightbox = document.getElementById('lightbox');
   const loader = document.getElementById('videoLoader');
+  const lightbox = document.getElementById('lightbox');
 
-  // ==== Apply saved theme ====
+  // === Apply stored theme preference ===
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark');
     toggle.checked = true;
+  } else {
+    document.body.classList.remove('dark');
+    toggle.checked = false;
   }
+
   updateThemeIcon();
 
-  // ==== Dark Mode Toggle ====
+  // === Dark Mode Toggle Event ===
   toggle.addEventListener('change', () => {
     document.body.classList.toggle('dark');
-    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    const mode = document.body.classList.contains('dark') ? 'dark' : 'light';
+    localStorage.setItem('theme', mode);
     updateThemeIcon();
   });
 
-  // ==== Update Toggle Icon (Sun/Moon) ====
+  // === Update Sun/Moon Icon with Animation ===
   function updateThemeIcon() {
     if (document.body.classList.contains('dark')) {
       themeIcon.classList.remove('ti-sun');
@@ -28,17 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
       themeIcon.classList.remove('ti-moon');
       themeIcon.classList.add('ti-sun');
     }
-
-    // Animate the icon
+    // Animate
     themeIcon.style.transform = 'translate(-50%, -50%) scale(1.4)';
     themeIcon.style.opacity = '0.7';
     setTimeout(() => {
       themeIcon.style.transform = 'translate(-50%, -50%) scale(1)';
       themeIcon.style.opacity = '1';
-    }, 200);
+    }, 150);
   }
 
-  // ==== Scroll-to-hide toggle ====
+  // === Hide Toggle Button on Scroll Down ===
   let lastScroll = 0;
   window.addEventListener('scroll', () => {
     const toggleWrapper = document.querySelector('.toggle-wrapper');
@@ -50,23 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
     lastScroll = window.scrollY;
   });
 
-  // ==== Setup Video Cards with YouTube Thumbnails ====
+  // === YouTube Thumbnails and Click Events ===
   document.querySelectorAll('.video-card').forEach(card => {
     const videoId = card.dataset.videoId;
     const thumbnail = card.querySelector('img');
     thumbnail.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
-    // Open lightbox on click
-    card.addEventListener('click', () => openLightbox(videoId));
-    thumbnail.addEventListener('click', () => openLightbox(videoId));
+    const open = () => openLightbox(videoId);
+    card.addEventListener('click', open);
+    thumbnail.addEventListener('click', open);
   });
 
-  // ==== Open Lightbox ====
+  // === Open Video Lightbox ===
   function openLightbox(videoId) {
     loader.style.display = 'block';
     ytFrame.style.display = 'none';
 
-    ytFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&fs=1&modestbranding=1&rel=0`;
+    ytFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
     lightbox.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
@@ -76,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // ==== Close Lightbox (global for onclick="closeLightbox()") ====
+  // === Close Lightbox (Global for HTML Button) ===
   window.closeLightbox = function () {
     ytFrame.src = '';
     lightbox.style.display = 'none';
