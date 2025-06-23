@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ranking recordings</title>
+
+  <!-- Fredoka One font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&display=swap" rel="stylesheet">
+
+  <!-- Tabler Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" href="zz.ico" type="image/x-icon"/>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://www.google.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+
+</head>
+<body>
+
+  <!-- Dark Mode Toggle -->
+  <div class="toggle-wrapper">
+    <label class="switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider">
+        <i id="themeIcon" class="ti ti-sun"></i>
+      </span>
+    </label>
+  </div>
+
+  <div class="container fade-in">
+    <h1><span class="white">SCIENCE FOR</span> <span class="blue">TECHNOLOGY</span></h1>
+    <h2><span class="white">ranking</span> <span class="pink">papers recording</span></h2>
+
+    <!-- Videos -->
+    <div class="video-section">
+      <div class="video-card hover-grow" data-video-id="KLNFNXogSjQ">
+        <img class="youtube-thumb" alt="Thumbnail">
+        <p>Paper 02 <span class="green">essay</span> <span class="pink">2 Hour</span></p>
+      </div>
+
+      <div class="video-card hover-grow" data-video-id="oVXAuOUHsvE">
+        <img class="youtube-thumb" alt="Thumbnail">
+        <p>Paper 02 <span class="green">mcq</span></p>
+      </div>
+
+      <div class="video-card hover-grow" data-video-id="6IP5MK6uThA">
+        <img class="youtube-thumb" alt="Thumbnail">
+        <p>Paper 01 <span class="green">mcq + essay</span></p>
+      </div>
+    </div>
+
+    <!-- PDFs -->
+    <h2><span class="pink">papers</span> <span class="blue">pdf</span></h2>
+    <div class="pdf-section">
+      <a href="https://drive.google.com/your-link-1" target="_blank" class="pdf-btn slide-up">Paper 01 Answers</a>
+      <a href="https://drive.google.com/your-link-2" target="_blank" class="pdf-btn slide-up">Paper 01 & 02 <span class="green">MCQ</span> Answers</a>
+      <a href="https://drive.google.com/your-link-3" target="_blank" class="pdf-btn slide-up">Paper 02 <span class="green">Essay</span> Answers</a>
+    </div>
+  </div>
+
+  <!-- Lightbox for YouTube -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <span class="close-btn" onclick="closeLightbox()">&times;</span>
+      <div id="videoLoader" class="loader"></div>
+      <iframe id="ytFrame" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Bottom Design -->
+  <img src="bottom.png" alt="Design" class="bottom-design">
+
+  <!-- Footer -->
+  <footer>
+    copyright:
+    <span class="pink">nilanga sir</span> |
+    2K25 Alevel | sftfor <span class="blue">life</span>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
